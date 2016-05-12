@@ -10,4 +10,9 @@ gem 'pg'
 
 gem 'rspec-rails'
 
-gem 'pry-rails', group: :development
+group :development, :test do
+  gem 'pry-rails'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'factory_girl_rails'
+end

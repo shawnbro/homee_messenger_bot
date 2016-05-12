@@ -9,3 +9,5 @@ gem 'spring', :group => :development
 gem 'pg'
 
 gem 'rspec-rails'
+
+gem 'pry-rails', group: :development

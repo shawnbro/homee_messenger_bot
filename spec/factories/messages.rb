@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :message do
-    user nil
     conversation nil
-    json_data ""
+    fb_id SecureRandom.urlsafe_base64
+    text nil
+    attachments nil
+    question nil
+    answer_option nil
   end
 end

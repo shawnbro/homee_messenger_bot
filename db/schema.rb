@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513230044) do
+ActiveRecord::Schema.define(version: 20160513200215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,15 +32,14 @@ ActiveRecord::Schema.define(version: 20160513230044) do
   add_index "conversations", ["user_id"], name: "index_conversations_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.json     "json_data"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "fb_id"
     t.integer  "conversation_id"
     t.integer  "question_id"
-    t.string   "text"
     t.integer  "answer_option_id"
-    t.string   "fb_id"
+    t.string   "text"
     t.json     "attachments"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "messages", ["answer_option_id"], name: "index_messages_on_answer_option_id", using: :btree

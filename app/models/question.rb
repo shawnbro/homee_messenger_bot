@@ -7,6 +7,8 @@ class Question < ActiveRecord::Base
   scope :initial, -> { find_by(ordering: 1) }
   default_scope { order(ordering: :asc) }
 
+  validates :prompt, presence: true, uniqueness: true
+
   def buttons
     answer_options.map do |opt|
       {
@@ -19,21 +21,15 @@ class Question < ActiveRecord::Base
 
   def api_elements
     added_title = false
-    buttons.each_slice(2).map do |btns|
+    buttons.each_slice(3).map do |btns|
       {
         title: prompt,
         buttons: btns
       }
     end
-  #   [
-  #     {
-  #       title: question.prompt,
-  #       buttons: question.buttons[0..2]
-  #     },
-  #     {
-  #       title: '...',
-  #       buttons: question.buttons[3..-1]
-  #     }
-  # ]
+  end
+
+  def self.max_ordering
+    pluck(:ordering).max
   end
 end

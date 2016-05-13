@@ -40,6 +40,10 @@ describe MessagesController do
       it 'creates a message that\'s associated with the the user\'s facebook id' do
         expect(user.messages.last.text).to eq 'hey there!'
       end
+
+      it 'creates a conversation' do
+        expect(user.conversations).not_to be_empty
+      end
     end
   end
 end

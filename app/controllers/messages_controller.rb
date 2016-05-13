@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     if MessengerService.new.handle_incoming_message(params[:entry])
       render nothing: true
     else
-      render json: { error: 'Unable to create message' }
+      render json: 'Error, something went wrong.'
     end
   end
 
@@ -13,5 +13,11 @@ class MessagesController < ApplicationController
     else
       render json: 'Error, wrong validation token.'
     end
+  end
+
+  private
+
+  def fb_id_param
+    params[:entry][0][:messaging][0][:sender][:id]
   end
 end

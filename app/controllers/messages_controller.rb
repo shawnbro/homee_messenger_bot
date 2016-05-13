@@ -1,16 +1,9 @@
 class MessagesController < ApplicationController
   def create
-    @user = User.find_or_create_by(fb_id: fb_id_param)
-    if @user
-      @message = @user.messages.new(json_data: params[:entry])
-
-      if @message.save
-        render json: @message
-      else
-        render json: { error: 'Unable to create message' }
-      end
+    if MessengerService.new.handle_incoming_message(params[:entry])
+      render nothing: true
     else
-      render json: { error: 'No such user exists.' }
+      render json: 'Error, something went wrong.'
     end
   end
 

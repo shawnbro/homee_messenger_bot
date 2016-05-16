@@ -1,35 +1,25 @@
 class MessengerClient
   include HTTParty
-  base_uri 'https://graph.facebook.com/v2.6/me/messages'
-  default_params access_token: ENV['FB_API_ACCESS_TOKEN']
+  base_uri 'https://graph.facebook.com/v2.6'
+  default_params access_token: 'EAAWNAHAdo04BADCzdrh3OK06LNlXrmoOUitAM7k6CoVBBRpedqhofnBd1IP7QH9loMhcZAkXI01T15bWxYqj2NsaZCN4mmbtrdwaOt6rHZAvFrV2rNGc7ocOZCBVw9s0nGzSKD65m7ZCNGm64p55ASAqx1kEs9p2vbF7jVgoiuwZDZD'
   format :json
   headers 'Content-Type' => 'application/json'
 
-  def send_message(user, question)
-    post(message_params(user, question))
+  def send_message(params)
+    post('/me/messages', params)
+  end
+
+  def get_user(fb_id)
+    get("/#{fb_id}/?fields=first_name,last_name,profile_pic,locale,timezone,gender")
   end
 
   private
 
-  def message_params(user, question)
-    {
-      recipient: {
-        id: user.fb_id,
-      },
-      message: {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "button",
-            text: question[:text],
-            buttons: question[:buttons]
-          }
-        }
-      }
-    }
+  def get(url)
+    self.class.get(url)
   end
 
-  def post(args)
-    self.class.post("/", body: args.to_json)
+  def post(url, args)
+    self.class.post(url, body: args.to_json)
   end
 end

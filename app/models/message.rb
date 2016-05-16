@@ -1,8 +1,9 @@
 class Message < ActiveRecord::Base
-  belongs_to :user
   belongs_to :conversation
+  belongs_to :question
+  belongs_to :answer_option
 
-  def text
-    json_data[0]['messaging'][0]['message']['text']
+  def user
+    conversation.user
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe Conversation, type: :model do
     let!(:conversation) { FactoryGirl.create(:conversation, user: user) }
 
     let!(:second_question) { FactoryGirl.create(:question, prompt: 'How many Bedrooms?', ordering: 2) }
-    let!(:initial_question) { FactoryGirl.create(:question, ordering: 1, prompt: 'Do you want to take this survey?') }
+    let!(:initial_question) { FactoryGirl.create(:question, prompt: 'Do you want to take this survey?', ordering: 1) }
 
     context 'when no questions have been asked' do
       it 'returns the initial question' do
@@ -17,11 +17,7 @@ RSpec.describe Conversation, type: :model do
     end
 
     context 'when user has answered the initial question' do
-      before do
-        conversation.messages.create(
-          question: initial_question
-        )
-      end
+      let!(:message) { FactoryGirl.create(:message, question: initial_question, conversation: conversation) }
       it 'returns the first question which hasn\'t been answered yet' do
         expect(conversation.next_question).to eq second_question
       end
@@ -30,13 +26,11 @@ RSpec.describe Conversation, type: :model do
     context 'when all questions have been answered' do
       before do
         [initial_question, second_question].each do |q|
-          conversation.messages.create(
-            question: q
-          )
+          FactoryGirl.create(:message, conversation: conversation, question: q)
         end
-        it 'returns nil' do
-          expect(conversation.next_question).to eq nil
-        end
+      end
+      it 'returns nil' do
+        expect(conversation.next_question).to eq nil
       end
     end
   end

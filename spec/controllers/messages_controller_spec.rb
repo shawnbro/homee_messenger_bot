@@ -27,12 +27,7 @@ describe MessagesController, :vcr do
       }
     end
 
-
-    def do_create_action
-      post :create, params
-    end
-
-    before { do_create_action }
+    before { post :create, params }
 
     let(:message) { Message.last }
 

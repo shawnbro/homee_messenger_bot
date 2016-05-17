@@ -30,6 +30,8 @@ class MessengerService
     msg.attachments = message_param['attachments'] if message_param
     msg.assign_question_id unless msg.question
 
+    convo.archive! if msg.user_opts_out?
+
     if msg.save && !convo.archived? && convo.next_question != []
       client.send_message(response_params(user, convo.next_question))
     end

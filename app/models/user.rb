@@ -10,14 +10,26 @@ class User < ActiveRecord::Base
   end
 
   def api_object
-    to_json(include: {
-      conversations: {
-        include: {
-          messages: {
-            include: [:question, :answer_option]
+    to_json(
+      only: [:id, :first_name, :last_name, :fb_id, :profile_pic],
+      include: {
+        conversations: {
+          only: [:archived, :id],
+          include: {
+            messages: {
+              include: {
+                question: {
+                  only: :prompt
+                },
+                answer_option: {
+                  only: :text
+                },
+              },
+              only: [:text]
+            }
           }
         }
       }
-    })
+    )
   end
 end

@@ -1,7 +1,7 @@
 class MessengerClient
   include HTTParty
   base_uri 'https://graph.facebook.com/v2.6'
-  default_params access_token: 'EAAWNAHAdo04BADCzdrh3OK06LNlXrmoOUitAM7k6CoVBBRpedqhofnBd1IP7QH9loMhcZAkXI01T15bWxYqj2NsaZCN4mmbtrdwaOt6rHZAvFrV2rNGc7ocOZCBVw9s0nGzSKD65m7ZCNGm64p55ASAqx1kEs9p2vbF7jVgoiuwZDZD'
+  default_params access_token: ENV['FB_API_ACCESS_TOKEN']
   format :json
   headers 'Content-Type' => 'application/json'
 

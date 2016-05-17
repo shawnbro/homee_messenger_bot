@@ -8,4 +8,16 @@ class User < ActiveRecord::Base
   def current_conversation
     unarchived_conversations.first
   end
+
+  def api_object
+    to_json(include: {
+      conversations: {
+        include: {
+          messages: {
+            include: [:question, :answer_option]
+          }
+        }
+      }
+    })
+  end
 end

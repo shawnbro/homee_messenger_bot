@@ -1,4 +1,4 @@
-class MessengerClient
+class Messenger::Client
   include HTTParty
   base_uri 'https://graph.facebook.com/v2.6'
   default_params access_token: ENV['FB_API_ACCESS_TOKEN']

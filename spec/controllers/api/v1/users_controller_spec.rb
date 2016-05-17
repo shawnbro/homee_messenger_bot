@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UsersController do
+describe Api::V1::UsersController do
   let!(:user) { FactoryGirl.create(:user) }
   let!(:conversation) { user.conversations.create }
   let!(:message) { conversation.messages.create(text: 'Hi there.', fb_id: 12345) }

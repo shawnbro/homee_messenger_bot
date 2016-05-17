@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe MessengerService, :vcr do
-  subject { MessengerService.new }
+describe Messenger::Service, :vcr do
+  subject { Messenger::Service.new }
 
   let(:message) do
     [{

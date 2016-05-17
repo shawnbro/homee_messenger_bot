@@ -1,4 +1,4 @@
-class MessengerService
+class Messenger::Service
   attr_accessor :api_message, :user
 
   def handle_incoming_message(api_message)
@@ -105,6 +105,6 @@ class MessengerService
   end
 
   def client
-    MessengerClient.new
+    Messenger::Client.new
   end
 end

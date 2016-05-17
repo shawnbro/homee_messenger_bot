@@ -1,6 +1,6 @@
-class MessagesController < ApplicationController
+class Api::V1::MessagesController < Api::V1::BaseController
   def create
-    if MessengerService.new.handle_incoming_message(params[:entry])
+    if Messenger::Service.new.handle_incoming_message(params[:entry])
       render nothing: true
     else
       render json: 'Error, something went wrong.'

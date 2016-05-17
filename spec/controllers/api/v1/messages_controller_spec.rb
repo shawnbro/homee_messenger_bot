@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe MessagesController, :vcr do
+describe Api::V1::MessagesController, :vcr do
   describe 'POST #create' do
     let(:params) do
       {

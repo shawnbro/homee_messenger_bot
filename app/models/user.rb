@@ -14,18 +14,18 @@ class User < ActiveRecord::Base
       only: [:id, :first_name, :last_name, :fb_id, :profile_pic],
       include: {
         conversations: {
-          only: [],
+          only: [:archived, :id],
           include: {
             messages: {
-              only: [:text],
               include: {
                 question: {
                   only: :prompt
                 },
                 answer_option: {
                   only: :text
-                }
-              }
+                },
+              },
+              only: [:text]
             }
           }
         }

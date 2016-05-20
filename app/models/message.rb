@@ -22,7 +22,7 @@ class Message < ActiveRecord::Base
 
   def user_opts_out?
     if question && question.ordering == 1 && answer_option.text == 'No'
-      MessengerClient.new.send_message(
+      Messenger::Client.new.send_message(
         {
           recipient: {
             id: conversation.user.fb_id

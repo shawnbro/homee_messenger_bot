@@ -21,10 +21,6 @@ class Conversation < ActiveRecord::Base
 
   private
 
-  def messenger_client
-    MessengerClient.new
-  end
-
   def answered_question_ids
     questions.map(&:id)
   end
